@@ -22,6 +22,11 @@ body {
     line-height: 1.6;
     color: var(--dark);
     overflow-x: hidden;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
 }
 
 .container {
@@ -140,7 +145,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(30,58,138,0.8), rgba(59,130,246,0.6));
+    background: linear-gradient(135deg, rgba(30,58,138,0.5), rgba(59,130,246,0.4));
     z-index: 1;
 }
 
@@ -152,7 +157,7 @@ nav {
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    opacity: 0.7;
+    opacity: 1;
 }
 
 .hero-content {
@@ -562,8 +567,14 @@ nav {
     }
     
     .tabs {
-        flex-direction: column;
-        align-items: center;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+    
+    .tab-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
     }
     
     .newsletter-form {
@@ -572,7 +583,32 @@ nav {
     }
     
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2rem !important;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .about-image {
+        height: 300px;
     }
 }
 
@@ -587,6 +623,19 @@ nav {
     
     .product-card {
         margin-bottom: 1rem;
+    }
+    
+    .hero {
+        height: 65vh;
+    }
+    
+    .swiper-pagination {
+        bottom: 1rem;
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
     }
 }
 
@@ -700,6 +749,16 @@ nav {
     .whatsapp-btn span {
         display: none;
     }
+
+    .clickable-location p {
+        font-size: 1rem !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .clickable-location p {
+        font-size: 0.8rem !important;
+    }
 }
 
 /* Swiper overrides */
@@ -709,6 +768,25 @@ nav {
 
 .swiper-slide .hero-content {
     animation: slideInUp 1s ease;
+}
+
+.hero {
+    background-attachment: fixed;
+    background-size: cover !important;
+}
+
+.swiper-slide {
+    background-attachment: fixed;
+}
+
+@keyframes backgroundSlide {
+    0% { background-position: center center; }
+    50% { background-position: center 10%; }
+    100% { background-position: center center; }
+}
+
+.swiper-slide {
+    animation: backgroundSlide 20s infinite;
 }
 
 @keyframes slideInUp {

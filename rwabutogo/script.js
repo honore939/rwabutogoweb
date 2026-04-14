@@ -3,18 +3,26 @@
 const swiper = new Swiper('.swiper', {
     loop: true,
     autoplay: {
-        delay: 5000,
+        delay: 4000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true,
     },
     pagination: {
         el: '.swiper-pagination',
         clickable: true,
     },
-    speed: 1000,
+    speed: 1200,
     effect: 'fade',
     fadeEffect: {
         crossFade: true
     },
+    on: {
+        slideChange: function () {
+            document.querySelectorAll('.swiper-slide').forEach((slide, index) => {
+                slide.style.animationDelay = `${index * 0.5}s`;
+            });
+        }
+    }
 });
 
 // Mobile Menu Toggle
@@ -156,3 +164,41 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Background image slideshow - changes every 3 seconds using local photos
+const bgImages = [
+  'Capture.PNG',
+  'Capture1.PNG',
+  'Capture2.PNG',
+  'Capture3.PNG',
+  'Capture4.PNG',
+  'gate.PNG',
+  'ironsheet.PNG',
+  'cement.PNG',
+  'roofing.PNG',
+  'brick.PNG',
+  'still.PNG',
+  'window.PNG'
+];
+
+let currentBgIndex = 0;
+
+function changeBackground() {
+  document.body.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+  currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+}
+
+// Preload images for smooth animation
+bgImages.forEach((imgSrc, index) => {
+  const img = new Image();
+  img.onload = () => console.log(`Preloaded ${imgSrc}`);
+  img.onerror = (e) => console.error(`Failed to load ${imgSrc}`, e);
+  img.src = imgSrc;
+});
+
+// Start the animation immediately
+console.log('Background animation started');
+changeBackground();
+setInterval(changeBackground, 3000);
+
+
